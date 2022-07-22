@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A coding Project By Muthana Alhabian</title>
+    <title>HUNDO: A coding Project By Muthana Alhabian</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,6 +13,7 @@
 
     <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="https://use.typekit.net/mhj5wdi.css">
     <link href="/css/site.css" rel="stylesheet">
     <link href="/css/prism.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/img/favicon-32x32.png">
@@ -23,7 +24,7 @@
     <!--Nav Section-->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="/img/Muthana Alhabian-logos_white small.png" class="d-inline-block align-text-center" width="35" height="35">  APP NAME</a>
+            <a class="navbar-brand logoFont" href="#"><img src="/img/Muthana Alhabian-logos_white small.png" class="d-inline-block align-text-center" width="35" height="35">  HUNDO</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,21 +53,81 @@
     <!--Main Section-->
     <main class="flex-shrink-0">
         <div class="container py-5 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME.</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for HUNDO.</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call Hello World
-                        function HelloWorld(){
-                            alert("hello World");
+                        //get the values from the page
+                        //starts or controller function
+                        function getValues(){
+                            //get values from the page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+
+                        //parse into Integers
+                            startValue = parseInt(startValue);
+                            endValue = parseInt(endValue);
+
+                            if(Number.isInteger(startValue) && Number.isInteger(endValue) && startValue >= 0 && endValue <= 100 && endValue >= startValue){
+                                //we call generateNumbers
+                                let numbers = generateNumbers(startValue, endValue);
+                                //we call displayNumbers
+                                displayNumbers(numbers);
+                            }
+                            else{
+                                alert("You must enter valid integers");
+                            }
+
+                        }
+
+                        //generate numbers from the startValue to endValue
+                        //logic function(s)
+                        function generateNumbers(sValue, eValue){
+
+                            let numbers = [];
+
+                            //we want to get all numbers from start to end
+                            for(let index = sValue; index <= eValue; index++){
+
+                                //this will execute in a loop until index= eValue
+                                numbers.push(index);
+                            }
+                            return numbers;
+                        }
+
+                        //display the numbers and mark even numbers bold
+                        //display or view functions
+                        function displayNumbers(numbers){
+
+                            let templateRows = "";
+                            for (let index = 0; index < numbers.length; index++) {
+
+                                let className = "even";
+                                let number = numbers[index];
+
+                                if(number % 2 == 0){
+                                    className = "even";
+                                }
+                                else{
+                                    className = "odd";
+                                }
+                                //This does not render correctly with Prism. See the source
+                                templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                            }
+
+                            document.getElementById("results").innerHTML = templateRows;
                         }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structed in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The Code is structured in three functions.</p>
+                    <h5>getValues()</h5>
+                    <p>getValue is responsible for getting the start and end values inputted by the user.</p>
+                    <h5>generateNumbers(sValue, eValue)</h5>
+                    <p>generateNumbers is responsible for generating all the numbers between the start and end values, this is done by a for loop that places each number in an array. </p>
+                    <h5>displayNumbers(numbers)</h5>
+                    <p>displayNumbers is responsible for displaying all the numbers from the array in a striped table on the page, while making the even numbers large in font and bolding it.</p>
                 </div>
             </div>
         </div>
